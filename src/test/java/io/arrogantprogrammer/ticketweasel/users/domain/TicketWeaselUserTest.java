@@ -50,9 +50,10 @@ public class TicketWeaselUserTest {
         repository.persist(ticketWeaselUser);
         repository.flush();
 
-        Ticket ticket = new Ticket(UUID.randomUUID());
+        Ticket ticket = new Ticket();
         ticketWeaselUser.addTickets(Collections.singletonList(ticket));
         assertEquals(1, ticketWeaselUser.getTickets().get().size());
+
         ticketWeaselUser.listTicketsForSale(Collections.singletonList(ticket.getUuid()));
         assertTrue(ticketWeaselUser.getTickets().get().get(0).isListedForSale());
 
@@ -64,11 +65,16 @@ public class TicketWeaselUserTest {
     public void testSellingTicketsTicketDoesNotExist() {
 
         TicketWeaselUser ticketWeaselUser = new TicketWeaselUser("Lemmy", "Kilminster", "lemmy@motorhead.com");
-        Ticket ticket = new Ticket(UUID.randomUUID());
+        Ticket ticket = new Ticket();
+
         ticketWeaselUser.addTickets(Collections.singletonList(ticket));
         assertEquals(1, ticketWeaselUser.getTickets().get().size());
+
+        ticketWeaselUser.listTicketsForSale(Collections.singletonList(ticket.getUuid()));
+        assertTrue(ticketWeaselUser.getTickets().get().get(0).isListedForSale());
+
         ticketWeaselUser.listTicketsForSale(Collections.singletonList(UUID.randomUUID()));
-        assertFalse(ticketWeaselUser.getTickets().get().get(0).isListedForSale());
+        assertTrue(ticketWeaselUser.getTickets().get().get(0).isListedForSale());
 
         ticketWeaselUser.sellTicket(Collections.singletonList(UUID.randomUUID()));
         assertEquals(1, ticketWeaselUser.getTickets().get().size());
