@@ -1,11 +1,10 @@
-package io.arrogantprogrammer.hostessstand.domain;
+package io.arrogantprogrammer.hostessstand.users.domain.domain;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import java.util.Objects;
 import java.util.UUID;
 @Entity

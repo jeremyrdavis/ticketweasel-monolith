@@ -1,7 +1,7 @@
-package io.arrogantprogrammer.hostessstand.infrastructure;
+package io.arrogantprogrammer.hostessstand.users.domain.infrastructure;
 
-import io.arrogantprogrammer.hostessstand.domain.TicketWeaselUserDTO;
-import io.arrogantprogrammer.hostessstand.domain.TicketWeaselUserService;
+import io.arrogantprogrammer.hostessstand.users.domain.domain.TicketWeaselUserDTO;
+import io.arrogantprogrammer.hostessstand.users.domain.domain.TicketWeaselUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

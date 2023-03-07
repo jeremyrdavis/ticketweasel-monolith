@@ -1,5 +1,8 @@
-package io.arrogantprogrammer.hostessstand.domain;
+package io.arrogantprogrammer.hostessstand.users.domain.domain;
 
+import io.arrogantprogrammer.hostessstand.users.domain.domain.Ticket;
+import io.arrogantprogrammer.hostessstand.users.domain.domain.TicketWeaselUser;
+import io.arrogantprogrammer.hostessstand.users.domain.domain.TicketWeaselUserRepository;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
 

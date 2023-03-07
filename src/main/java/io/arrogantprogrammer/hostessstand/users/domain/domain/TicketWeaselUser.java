@@ -1,4 +1,4 @@
-package io.arrogantprogrammer.hostessstand.domain;
+package io.arrogantprogrammer.hostessstand.users.domain.domain;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
