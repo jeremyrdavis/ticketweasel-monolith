@@ -86,11 +86,11 @@ class TicketWeaselUser extends PanacheEntity {
         });
     }
 
-    public List<Ticket> getTickets() {
+    public Optional<List<Ticket>> getTickets() {
         if (this.tickets == null) {
-            return new ArrayList<>();
+            return Optional.empty();
         }else {
-            return this.tickets.values().stream().toList();
+            return Optional.of(this.tickets.values().stream().toList());
         }
     }
 
