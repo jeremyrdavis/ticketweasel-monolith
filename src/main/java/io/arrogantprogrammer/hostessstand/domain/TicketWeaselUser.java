@@ -2,8 +2,7 @@ package io.arrogantprogrammer.hostessstand.domain;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.*;
 
 @Entity
@@ -15,8 +14,12 @@ class TicketWeaselUser extends PanacheEntity {
 
     String email;
 
-    @OneToMany(mappedBy = "ticketWeaselUser")
-    List<Ticket> tickets;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_ticket_mapping",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "ticket_uuid", referencedColumnName = "uuid")})
+    @MapKeyColumn(name = "uuid")
+    Map<UUID, Ticket> tickets;
 
     public TicketWeaselUser(String firstName, String lastName, String email) {
         this.firstName = firstName;
@@ -75,29 +78,36 @@ class TicketWeaselUser extends PanacheEntity {
 
     public void addTickets(List<Ticket> ticketsList) {
         if (this.tickets == null) {
-            tickets = new ArrayList<>(ticketsList.size());
+            tickets = new HashMap<>(ticketsList.size());
         }
         ticketsList.forEach(ticket -> {
             ticket.ticketWeaselUser = this;
+            tickets.put(ticket.getUuid(), ticket);
         });
-        this.tickets.addAll(ticketsList);
     }
 
     public List<Ticket> getTickets() {
         if (this.tickets == null) {
             return new ArrayList<>();
         }else {
-            return this.tickets;
+            return this.tickets.values().stream().toList();
         }
     }
 
-    public void listTicketsForSale(List<Ticket> ticketsToList) {
-        ticketsToList.forEach(ticketToList -> {
-            tickets.forEach(ticket -> {
-                if(ticketToList.getUuid().equals(ticket.getUuid())){
-                    ticket.listForSale();
-                }
-            });
+    public void listTicketsForSale(List<UUID> ticketsToList) {
+        ticketsToList.forEach(uuid -> {
+            if(tickets.containsKey(uuid)){
+                tickets.get(uuid).listForSale();
+            }
+        });
+    }
+
+    public void sellTicket(List<UUID> purchasedTickets) {
+
+        purchasedTickets.forEach(uuid -> {
+            if(tickets.containsKey(uuid)){
+                tickets.remove(uuid);
+            }
         });
     }
 }
