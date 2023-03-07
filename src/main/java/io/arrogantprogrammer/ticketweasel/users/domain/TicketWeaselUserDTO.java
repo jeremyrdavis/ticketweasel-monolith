@@ -1,4 +1,4 @@
-package io.arrogantprogrammer.hostessstand.users.domain.domain;
+package io.arrogantprogrammer.ticketweasel.users.domain;
 
 public record TicketWeaselUserDTO(Long id, String firstName, String lastName, String email) {
 

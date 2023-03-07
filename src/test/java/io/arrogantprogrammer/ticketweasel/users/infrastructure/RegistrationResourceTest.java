@@ -1,6 +1,6 @@
-package io.arrogantprogrammer.hostessstand.users.domain.infrastructure;
+package io.arrogantprogrammer.ticketweasel.users.infrastructure;
 
-import io.arrogantprogrammer.hostessstand.users.domain.domain.TicketWeaselUserDTO;
+import io.arrogantprogrammer.ticketweasel.users.domain.TicketWeaselUserDTO;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;

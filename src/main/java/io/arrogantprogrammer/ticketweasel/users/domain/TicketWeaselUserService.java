@@ -1,4 +1,4 @@
-package io.arrogantprogrammer.hostessstand.users.domain.domain;
+package io.arrogantprogrammer.ticketweasel.users.domain;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
